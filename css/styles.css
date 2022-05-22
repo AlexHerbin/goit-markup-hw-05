@@ -17,6 +17,7 @@
   --title-text-color: #212121;
   --accent-color: #2196f3;
   --bacground-primary-color: #ffffff;
+  --taiming-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -97,6 +98,7 @@ img {
 }
 
 .site-nav .link {
+  position: relative;
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -108,6 +110,8 @@ img {
 
   color: var(--title-text-color);
   text-decoration: none;
+
+  transition: color 250ms var(--taiming-function);
 }
 
 .site-nav .link:hover,
@@ -117,6 +121,19 @@ img {
 
 .site-nav .link.current {
   color: var(--accent-color);
+}
+
+.site-nav .link.current::after {
+  position: absolute;
+  top: 96%;
+  left: 0;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+
+  background-color: var(--accent-color);
 }
 
 .auth-nav {
@@ -143,6 +160,8 @@ img {
 
   color: var(--primary-text-color);
   text-decoration: none;
+
+  transition: color 250ms var(--taiming-function);
 }
 
 .auth-nav .link:hover,
@@ -192,6 +211,67 @@ img {
   color: #ffffff;
 }
 
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  transition: opacity 250ms var(--taiming-function);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 528px;
+  height: 581px;
+
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms var(--taiming-function);
+}
+
+.modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  width: 30px;
+  height: 30px;
+
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
 /* Кнопки */
 
 .hero-btn {
@@ -207,6 +287,13 @@ img {
 
   color: #ffffff;
   background-color: var(--accent-color);
+
+  transform: box-shadow 250ms var(--taiming-function);
+}
+
+.hero-btn:hover,
+.hero-btn:focus {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .portfolio-btn .btn {
@@ -221,6 +308,10 @@ img {
 
   color: var(--title-text-color);
   background-color: #f5f4fa;
+
+  transition: color 250ms var(--taiming-function),
+    background-color 250ms var(--taiming-function),
+    box-shadow 250ms var(--taiming-function);
 }
 
 .portfolio-btn .btn:hover,
@@ -321,6 +412,31 @@ img {
   margin-right: 30px;
 }
 
+.works-list .item {
+  position: relative;
+}
+
+.works-list .item-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  content: "";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  color: #fff;
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
 /* Секция команда */
 
 .team-list {
@@ -391,10 +507,14 @@ img {
   height: 44px;
 
   border-radius: 50%;
+
+  transition: background-color 250ms var(--taiming-function);
 }
 
 .socials-icon {
   fill: #757575;
+
+  transition: fill 250ms var(--taiming-function);
 }
 
 .socials-link:hover .socials-icon,
@@ -423,6 +543,8 @@ img {
 
   border-radius: 4px;
   border: 1px solid #afb1b8;
+
+  transition: border-color 250ms var(--taiming-function);
 }
 
 .clients-item:not(:last-child) {
@@ -431,6 +553,8 @@ img {
 
 .clients-icon {
   fill: #757575;
+
+  transition: fill 250ms var(--taiming-function);
 }
 
 .clients:hover,
@@ -471,6 +595,8 @@ img {
 .works .link {
   text-decoration: none;
   display: block;
+
+  transition: box-shadow 250ms var(--taiming-function);
 }
 
 .works .title {
@@ -508,6 +634,37 @@ img {
   border-left-width: 1px;
   border-left-style: solid;
   border-left-color: #eeeeee;
+}
+
+.works-thumb {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.text-thumb {
+  position: absolute;
+  content: "";
+
+  padding: 63px 24px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+
+  color: #fff;
+  background-color: rgba(33, 150, 243, 0.9);
+
+  transform: translateY(101%);
+  transition: transform 250ms var(--taiming-function);
+}
+
+.works-thumb:hover .text-thumb {
+  transform: translateY(0);
 }
 
 /* Подвал */
@@ -560,6 +717,8 @@ img {
 
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
+
+  transition: color 250ms var(--taiming-function);
 }
 
 .footer-auth .link:focus,
@@ -607,6 +766,8 @@ img {
 
   fill: #fff;
   background-color: rgba(255, 255, 255, 0.1);
+
+  transition: background-color 250ms var(--taiming-function);
 }
 
 .join-link:hover,
