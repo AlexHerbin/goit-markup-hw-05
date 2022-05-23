@@ -222,7 +222,8 @@ img {
   background-color: rgba(0, 0, 0, 0.2);
 
   opacity: 1;
-  transition: opacity 250ms var(--taiming-function);
+  transition: opacity 250ms var(--taiming-function),
+    visibility 250ms var(--taiming-function);
 }
 
 .backdrop.is-hidden {
@@ -512,7 +513,7 @@ img {
 }
 
 .socials-icon {
-  fill: #757575;
+  fill: #afb1b8;
 
   transition: fill 250ms var(--taiming-function);
 }
@@ -552,7 +553,7 @@ img {
 }
 
 .clients-icon {
-  fill: #757575;
+  fill: #afb1b8;
 
   transition: fill 250ms var(--taiming-function);
 }
@@ -663,7 +664,8 @@ img {
   transition: transform 250ms var(--taiming-function);
 }
 
-.works-thumb:hover .text-thumb {
+.works .link:hover .text-thumb,
+.works .link:focus .text-thumb {
   transform: translateY(0);
 }
 
